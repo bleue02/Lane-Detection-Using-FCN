@@ -1,16 +1,15 @@
 '''images_set'의 이미지를 두 개의 개별 배열에 할당합니다.
 도로 이미지를 'X'에 할당하고 실제 마스크를 'Y'에 할당합니다.
 '''
-# 해당 py는 RAM 사용
-
 from train_data_loader import ImageLoader
 from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
+from matplotlib import pyplot as plt
+from IPython.display import display
 
 import numpy as np
 import random
-
 
 def calculate_batch(path):
     num_images = 7252
@@ -41,8 +40,9 @@ def calculate_batch(path):
     # convert the lists to numpy arrays
     X = np.array(X)
     Y = np.array(Y)
+    return X, Y
 
-def image_show():
+def image_show(path):
     X, Y = calculate_batch(path)
     X, Y = shuffle(X, Y, random_state=100)
     X = np.array(X[:4000]) # get 4000 training samples
@@ -71,10 +71,12 @@ def image_show():
 
         plt.subplot(10, 2, index + 1)
         plt.imshow(j, cmap='gray')
-        plt.title('Ground truth mask')
+        plt.title('Ground truth mak')
         index += 2
 
 if __name__ == '__main__':
-    path = r'C:\Users\jdah5454\PycharmProjects\Lane Detection Usin FCN\dataset\tusimple_preprocessed\training'
-    calculate_batch(path)
-    image_show()
+    # MAC
+    path = r'/Users/bleue/PycharmProjects/Lane-Detection-Using-FCN/dataset/tusimple_preprocessed/training'
+    # Windows
+    # path = r'C:\Users\jdah5454\PycharmProjects\Lane Detection Usin FCN\dataset\tusimple_preprocessed\training'
+    image_show(path)
